@@ -1,0 +1,30 @@
+.container {
+  padding: 0 24px;
+
+  .name-box {
+    margin: 48px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .gender-age-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+
+    &__age {
+      width: 19px;
+      height: 32px;
+      font-size: 16px;
+      padding: 12px 32px 12px 16px;
+    }
+  }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+  .grid {
+    grid-template-columns: repeat(2, 50%);
+  }
+}
