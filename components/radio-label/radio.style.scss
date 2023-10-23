@@ -1,0 +1,19 @@
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 8px 0;
+
+  &__input {
+    width: 24px;
+    height: 24px;
+  }
+
+  &__label {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%;
+    letter-spacing: 0.64px;
+  }
+}
