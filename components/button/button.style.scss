@@ -5,20 +5,48 @@
   border: transparent;
   color: rgba(255, 255, 255, 0.34);
   font-size: 16px;
+  transition: all 0.3s;
 
   &--default {
     background: #949497;
+    cursor: not-allowed;
   }
 
   &--success {
     border-radius: 8px;
     color: #fff;
     background: #0017c1;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+      transform: translateY(0px);
+    }
   }
 
   &--cancel {
     border: 1px solid #0017c1;
     color: #0017c1;
     background: #fff;
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+        0 4px 6px -4px rgb(0 0 0 / 0.1);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+      transform: translateY(0px);
+    }
   }
 }

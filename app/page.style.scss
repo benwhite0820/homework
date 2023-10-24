@@ -1,6 +1,5 @@
 .container {
-  padding: 0 24px;
-  margin-top: 84px;
+  margin: 84px 24px;
 
   .name-box {
     margin: 48px 0;
@@ -13,6 +12,13 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
+
+    &__gender {
+      &-title {
+        display: inline-block;
+        margin-bottom: 8px;
+      }
+    }
 
     &__age {
       width: 19px;
