@@ -13,6 +13,8 @@ type Props = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   value?: string;
+  isValid?: boolean;
+  invalidMessage?: string;
 };
 
 const InputLabel = ({
@@ -24,6 +26,8 @@ const InputLabel = ({
   onChange,
   value,
   onBlur,
+  isValid = true,
+  invalidMessage = '',
 }: Props) => {
   return (
     <div className={`input-label ${className}`}>
@@ -31,7 +35,9 @@ const InputLabel = ({
         {label}
       </Label>
       <input
-        className={`input-label__input ${inputClassName}`}
+        className={`input-label__input ${inputClassName} ${
+          !isValid && invalidMessage && 'input-label__input-invalid'
+        }`}
         name={name}
         id={name}
         required={required}
@@ -39,6 +45,9 @@ const InputLabel = ({
         value={value}
         onBlur={onBlur}
       />
+      {!isValid && invalidMessage && (
+        <p className="input-label__invalid-message">{invalidMessage}</p>
+      )}
     </div>
   );
 };

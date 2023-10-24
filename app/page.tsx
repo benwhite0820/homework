@@ -7,6 +7,7 @@ import Header from '@/components/header/header.component';
 import Label from '@/components/label/label.component';
 import RadioLabel from '@/components/radio-label/radio.component';
 import Button from '@/components/button/button.component';
+import { getIsInputValid } from '@/lib/checkValidInfo';
 
 export default function Home() {
   const [userInfo, setUserInfo] = React.useState<{ [key in string]: string }>({
@@ -20,20 +21,30 @@ export default function Home() {
 
   const [isFormComplete, setIsFormComplete] = React.useState(false);
 
+  const patterns = {
+    infoPattern: /^[A-Za-z]+$/,
+    agePattern: /^[0-9]+$/,
+  };
+
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name;
+    const { name } = event.target;
     setUserInfo({
       ...userInfo,
       [name]: event.target.value,
     });
   };
 
-  const handleIsFormCompleteOnBlur = (
-    event: React.FocusEvent<HTMLInputElement>
-  ) => {
+  const handleIsFormCompleteOnBlur = () => {
+    if (!Object.values(userInfo).every((val) => val !== ''))
+      return setIsFormComplete(false);
+
     for (const key in userInfo) {
-      if (userInfo[key] === '') return;
+      const regPattern =
+        key === 'age' ? patterns.agePattern : patterns.infoPattern;
+
+      if (!regPattern.test(userInfo[key])) return setIsFormComplete(false);
     }
+
     return setIsFormComplete(true);
   };
 
@@ -50,6 +61,11 @@ export default function Home() {
             onChange={handleOnChange}
             value={userInfo.firstName}
             onBlur={handleIsFormCompleteOnBlur}
+            invalidMessage={'記号・数字は使用できません'}
+            isValid={getIsInputValid({
+              toBeCheckedValue: userInfo.firstName,
+              regPattern: patterns.infoPattern,
+            })}
           />
           <InputLabel
             label="名"
@@ -58,6 +74,11 @@ export default function Home() {
             onChange={handleOnChange}
             value={userInfo.lastName}
             onBlur={handleIsFormCompleteOnBlur}
+            invalidMessage={'記号・数字は使用できません'}
+            isValid={getIsInputValid({
+              toBeCheckedValue: userInfo.lastName,
+              regPattern: patterns.infoPattern,
+            })}
           />
           <InputLabel
             label="氏（カタカナ）"
@@ -66,6 +87,11 @@ export default function Home() {
             onChange={handleOnChange}
             value={userInfo.firstNameKatakana}
             onBlur={handleIsFormCompleteOnBlur}
+            invalidMessage={'記号・数字は使用できません'}
+            isValid={getIsInputValid({
+              toBeCheckedValue: userInfo.firstNameKatakana,
+              regPattern: patterns.infoPattern,
+            })}
           />
           <InputLabel
             label="名（カタカナ）"
@@ -74,6 +100,11 @@ export default function Home() {
             onChange={handleOnChange}
             value={userInfo.lastNameKatakana}
             onBlur={handleIsFormCompleteOnBlur}
+            invalidMessage={'記号・数字は使用できません'}
+            isValid={getIsInputValid({
+              toBeCheckedValue: userInfo.lastNameKatakana,
+              regPattern: patterns.infoPattern,
+            })}
           />
         </div>
         <div className="gender-age-box">
@@ -99,9 +130,9 @@ export default function Home() {
             <RadioLabel
               label="無回答・その他"
               name="gender"
-              id="no-answer"
+              id="others"
               onChange={handleOnChange}
-              value="no-answer"
+              value="others"
               onBlur={handleIsFormCompleteOnBlur}
             />
           </div>
@@ -113,6 +144,11 @@ export default function Home() {
               inputClassName="gender-age-box__age"
               onChange={handleOnChange}
               onBlur={handleIsFormCompleteOnBlur}
+              invalidMessage={'半角数字以外は使用できません'}
+              isValid={getIsInputValid({
+                toBeCheckedValue: userInfo.age,
+                regPattern: patterns.agePattern,
+              })}
             />
           </div>
           <div className="button-box">
