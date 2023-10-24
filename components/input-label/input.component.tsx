@@ -29,15 +29,16 @@ const InputLabel = ({
   isValid = true,
   invalidMessage = '',
 }: Props) => {
+  const isValidClassName =
+    !isValid && invalidMessage ? 'input-label__input-invalid' : '';
+
   return (
     <div className={`input-label ${className}`}>
       <Label htmlFor={name} required={required}>
         {label}
       </Label>
       <input
-        className={`input-label__input ${inputClassName} ${
-          !isValid && invalidMessage && 'input-label__input-invalid'
-        }`}
+        className={`input-label__input ${inputClassName} ${isValidClassName}`}
         name={name}
         id={name}
         required={required}
