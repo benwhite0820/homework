@@ -48,6 +48,11 @@ export default function Home() {
     return setIsFormComplete(true);
   };
 
+  const handleSubmitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    alert('complete');
+  };
+
   const handleResetInput = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setUserInfo({
@@ -63,11 +68,7 @@ export default function Home() {
 
   return (
     <main className="container">
-      <form
-        onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
-          event.preventDefault();
-        }}
-      >
+      <form onSubmit={handleSubmitForm}>
         <Header>あなたの情報を入力してください</Header>
         <div className="name-box">
           <Header>名前</Header>
