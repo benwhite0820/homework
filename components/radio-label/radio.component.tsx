@@ -12,6 +12,7 @@ type Props = {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  checked?: boolean;
 };
 
 const RadioLabel = ({
@@ -22,6 +23,7 @@ const RadioLabel = ({
   onChange,
   value,
   onBlur,
+  checked,
 }: Props) => {
   return (
     <div className={`radio-label ${className}`}>
@@ -33,6 +35,7 @@ const RadioLabel = ({
         onChange={onChange}
         value={value}
         onBlur={onBlur}
+        checked={checked}
       />
       <Label htmlFor={id} className="radio-label__label">
         {label}
