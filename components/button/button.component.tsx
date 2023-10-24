@@ -1,14 +1,16 @@
+'use client';
+
 import './button.style.scss';
 import React from 'react';
 
 type Props = {
   children: React.ReactNode;
-  type: 'default' | 'primary' | 'cancel';
+  type: 'default' | 'success' | 'cancel';
 };
 const Button = ({ children, type }: Props) => {
   const buttonType = {
     default: 'button--default',
-    primary: 'button--primary',
+    success: 'button--success',
     cancel: 'button--cancel',
   };
 
