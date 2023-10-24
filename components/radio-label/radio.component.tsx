@@ -1,3 +1,5 @@
+'use client';
+
 import Label from '../label/label.component';
 import './radio.style.scss';
 import React from 'react';
@@ -5,19 +7,34 @@ import React from 'react';
 type Props = {
   label?: string;
   name?: string;
+  id?: string;
   className?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 };
 
-const RadioLabel = ({ label, name, className = '' }: Props) => {
+const RadioLabel = ({
+  label,
+  name,
+  id,
+  className = '',
+  onChange,
+  value,
+  onBlur,
+}: Props) => {
   return (
     <div className={`radio-label ${className}`}>
       <input
         className="radio-label__input"
         name={name}
-        id={name}
+        id={id}
         type="radio"
+        onChange={onChange}
+        value={value}
+        onBlur={onBlur}
       />
-      <Label htmlFor={name} className="radio-label__label">
+      <Label htmlFor={id} className="radio-label__label">
         {label}
       </Label>
     </div>

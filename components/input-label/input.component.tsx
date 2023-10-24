@@ -1,3 +1,5 @@
+'use client';
+
 import Label from '../label/label.component';
 import './input.style.scss';
 import React from 'react';
@@ -8,6 +10,9 @@ type Props = {
   required?: boolean;
   className?: string;
   inputClassName?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  value?: string;
 };
 
 const InputLabel = ({
@@ -16,6 +21,9 @@ const InputLabel = ({
   required = false,
   className = '',
   inputClassName = '',
+  onChange,
+  value,
+  onBlur,
 }: Props) => {
   return (
     <div className={`input-label ${className}`}>
@@ -27,6 +35,9 @@ const InputLabel = ({
         name={name}
         id={name}
         required={required}
+        onChange={onChange}
+        value={value}
+        onBlur={onBlur}
       />
     </div>
   );
