@@ -1,5 +1,6 @@
 .container {
   padding: 0 24px;
+  margin-top: 84px;
 
   .name-box {
     margin: 48px 0;
@@ -26,12 +27,5 @@
     margin-top: 48px;
     flex-direction: column;
     gap: 8px;
-  }
-}
-
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
   }
 }
