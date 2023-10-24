@@ -1,12 +1,12 @@
 'use client';
 
 import './button.style.scss';
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 
 type Props = {
   children: React.ReactNode;
   buttonColor: 'default' | 'success' | 'cancel';
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button = ({ children, buttonColor, onClick }: Props) => {
@@ -20,11 +20,7 @@ const Button = ({ children, buttonColor, onClick }: Props) => {
     <button
       className={`button ${buttonColorType[buttonColor]}`}
       disabled={buttonColor === 'default'}
-      onClick={(event) => {
-        if (onClick) {
-          onClick(event);
-        }
-      }}
+      onClick={onClick}
       type="submit"
     >
       {children}
