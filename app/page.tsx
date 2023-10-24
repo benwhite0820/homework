@@ -1,37 +1,126 @@
+'use client';
+
 import './page.style.scss';
+import React from 'react';
 import InputLabel from '@/components/input-label/input.component';
 import Header from '@/components/header/header.component';
 import Label from '@/components/label/label.component';
 import RadioLabel from '@/components/radio-label/radio.component';
+import Button from '@/components/button/button.component';
 
 export default function Home() {
+  const [userInfo, setUserInfo] = React.useState<{ [key in string]: string }>({
+    firstName: '',
+    lastName: '',
+    firstNameKatakana: '',
+    lastNameKatakana: '',
+    gender: '',
+    age: '',
+  });
+
+  const [isFormComplete, setIsFormComplete] = React.useState(false);
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name;
+    setUserInfo({
+      ...userInfo,
+      [name]: event.target.value,
+    });
+  };
+
+  const handleIsFormCompleteOnBlur = (
+    event: React.FocusEvent<HTMLInputElement>
+  ) => {
+    for (const key in userInfo) {
+      if (userInfo[key] === '') return;
+    }
+    return setIsFormComplete(true);
+  };
+
   return (
     <main className="container">
-      <Header>あなたの情報を入力してください</Header>
-      <div className="name-box">
-        <Header>名前</Header>
-        <InputLabel label="姓" required name="firstName" />
-        <InputLabel label="名" required name="secondName" />
-        <InputLabel label="氏（カタカナ）" required name="firstName-katakana" />
-        <InputLabel label="名（カタカナ）" required name="lastName-katakana" />
-      </div>
-      <div className="gender-age-box">
-        <Header>年齢・性別</Header>
-        <div>
-          <Label required>性別</Label>
-          <RadioLabel label="男性" name="male" />
-          <RadioLabel label="女性" name="female" />
-          <RadioLabel label="無回答・その他" name="no-answer" />
-        </div>
-        <div>
+      <form>
+        <Header>あなたの情報を入力してください</Header>
+        <div className="name-box">
+          <Header>名前</Header>
           <InputLabel
-            label="年齢"
+            label="姓"
             required
-            name="age"
-            inputClassName="gender-age-box__age"
+            name="firstName"
+            onChange={handleOnChange}
+            value={userInfo.firstName}
+            onBlur={handleIsFormCompleteOnBlur}
+          />
+          <InputLabel
+            label="名"
+            required
+            name="lastName"
+            onChange={handleOnChange}
+            value={userInfo.lastName}
+            onBlur={handleIsFormCompleteOnBlur}
+          />
+          <InputLabel
+            label="氏（カタカナ）"
+            required
+            name="firstNameKatakana"
+            onChange={handleOnChange}
+            value={userInfo.firstNameKatakana}
+            onBlur={handleIsFormCompleteOnBlur}
+          />
+          <InputLabel
+            label="名（カタカナ）"
+            required
+            name="lastNameKatakana"
+            onChange={handleOnChange}
+            value={userInfo.lastNameKatakana}
+            onBlur={handleIsFormCompleteOnBlur}
           />
         </div>
-      </div>
+        <div className="gender-age-box">
+          <Header>年齢・性別</Header>
+          <div>
+            <Label required>性別</Label>
+            <RadioLabel
+              label="男性"
+              name="gender"
+              id="male"
+              onChange={handleOnChange}
+              value="male"
+              onBlur={handleIsFormCompleteOnBlur}
+            />
+            <RadioLabel
+              label="女性"
+              name="gender"
+              id="female"
+              onChange={handleOnChange}
+              value="female"
+              onBlur={handleIsFormCompleteOnBlur}
+            />
+            <RadioLabel
+              label="無回答・その他"
+              name="gender"
+              id="no-answer"
+              onChange={handleOnChange}
+              value="no-answer"
+              onBlur={handleIsFormCompleteOnBlur}
+            />
+          </div>
+          <div>
+            <InputLabel
+              label="年齢"
+              required
+              name="age"
+              inputClassName="gender-age-box__age"
+              onChange={handleOnChange}
+              onBlur={handleIsFormCompleteOnBlur}
+            />
+          </div>
+          <div className="button-box">
+            <Button type={isFormComplete ? 'success' : 'default'}>次へ</Button>
+            <Button type="cancel">戻る</Button>
+          </div>
+        </div>
+      </form>
     </main>
   );
 }
