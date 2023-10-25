@@ -22,7 +22,7 @@ export default function Home() {
   const [isFormComplete, setIsFormComplete] = React.useState(false);
 
   const patterns = {
-    infoPattern: /^[A-Za-z]+$/,
+    infoPattern: /^[a-zA-Z\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\s]+$/,
     agePattern: /^[0-9]+$/,
   };
 
