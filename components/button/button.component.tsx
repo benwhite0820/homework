@@ -11,9 +11,9 @@ type Props = {
 
 const Button = ({ children, buttonColor, onClick }: Props) => {
   const buttonColorType = {
-    default: 'button--default',
-    success: 'button--success',
-    cancel: 'button--cancel',
+    default: 'button-default',
+    success: 'button-success',
+    cancel: 'button-cancel',
   };
 
   return (

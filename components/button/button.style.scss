@@ -7,12 +7,12 @@
   font-size: 16px;
   transition: all 0.3s;
 
-  &--default {
+  &-default {
     background: #949497;
     cursor: not-allowed;
   }
 
-  &--success {
+  &-success {
     border-radius: 8px;
     color: #fff;
     background: #0017c1;
@@ -31,7 +31,7 @@
     }
   }
 
-  &--cancel {
+  &-cancel {
     border: 1px solid #0017c1;
     color: #0017c1;
     background: #fff;
